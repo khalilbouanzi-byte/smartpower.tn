@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Spower Smart Home</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+
+  <!-- MOBILE SMARTPHONE FRAME -->
+  <div class="mobile-app-shell">
+    
+    <!-- Top iOS Status Bar -->
+    <header class="ios-status-bar">
+      <span class="status-time" id="statusTime">4:49</span>
+      <div class="status-notch"></div>
+      <div class="status-right-icons">
+        <svg class="icon-cellular" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <rect x="2" y="16" width="3" height="6" rx="1"/>
+          <rect x="7" y="12" width="3" height="10" rx="1"/>
+          <rect x="12" y="8" width="3" height="14" rx="1"/>
+          <rect x="17" y="4" width="3" height="18" rx="1"/>
+        </svg>
+        <svg class="icon-wifi" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+          <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+          <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+          <circle cx="12" cy="19" r="1.2" fill="currentColor"/>
+        </svg>
+        <div class="ios-battery">
+          <span class="battery-pct">54</span>
+          <div class="battery-shell"><div class="battery-level" style="width: 54%"></div></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN SCROLLABLE APP VIEWPORT -->
+    <main class="app-viewport">
+
+      <!-- ============================================== -->
+      <!-- SCREEN 1: DOMICILE (1000, 1001, 1002, 1003)    -->
+      <!-- ============================================== -->
+      <section id="screenDomicile" class="mobile-screen active">
+        <!-- Ambient Top Gradient Header -->
+        <div class="ambient-header-glow">
+          <div class="top-nav-row">
+            <button class="home-selector-btn" id="openHomeModalBtn">
+              <span id="labelCurrentHome">My Home</span>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+            </button>
+
+            <button class="circle-add-btn" id="openAddMenuBtn">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.8"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            </button>
+          </div>
+
+          <!-- Add Device Popup Menu (1020.jpg) -->
+          <div class="popup-menu" id="addDevicePopup">
+            <div class="popup-item" id="popupAddDevice">
+              <div class="popup-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              </div>
+              <span>Ajouter un appareil</span>
+            </div>
+            <div class="popup-divider"></div>
+            <div class="popup-item" id="popupScanQr">
+              <div class="popup-icon">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V5a2 2 0 0 1 2-2h2m10 0h2a2 2 0 0 1 2 2v2m0 10v2a2 2 0 0 1-2 2h-2m-10 0H5a2 2 0 0 1-2-2v-2"/><line x1="7" y1="12" x2="17" y2="12"/></svg>
+              </div>
+              <span>Analyse</span>
+            </div>
+          </div>
+
+          <!-- Google Home banner -->
+          <div class="google-home-pill" id="ghomeBanner">
+            <div class="ghome-left">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="#EA4335" d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
+                <path fill="#4285F4" d="M12 3L2 12h3v8"/>
+                <path fill="#FBBC05" d="M14 20v-6h-4v6"/>
+                <path fill="#34A853" d="M19 20v-8h3L12 3"/>
+              </svg>
+              <span>Connecter Google Home</span>
+            </div>
+            <button class="ghome-close" id="closeGhomeBtn">&times;</button>
+          </div>
+
+          <!-- Room Tabs -->
+          <div class="room-tabs-row">
+            <div class="room-tabs-container" id="roomTabsBar">
+              <button class="room-tab-btn active" data-room="all">Tous</button>
+              <button class="room-tab-btn" data-room="Livingroom">Livingro...</button>
+              <button class="room-tab-btn" data-room="Bedroom">Bedroom</button>
+              <button class="room-tab-btn" data-room="Other">Other</button>
+            </div>
+            <div class="room-actions">
+              <button class="room-action-btn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="16" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button>
+              <button class="room-action-btn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1.5"/><circle cx="6" cy="12" r="1.5"/><circle cx="18" cy="12" r="1.5"/></svg></button>
+            </div>
+          </div>
+        </div><!-- End ambient-header-glow -->
+
+        <!-- Device Cards List (1000.jpg) -->
+        <div class="screen-scroll-body" id="domicileScrollBody">
+          <div class="device-card-list" id="deviceCardsContainer">
+            <!-- Dynamic device cards -->
+          </div>
+
+          <!-- Empty Room State (1001, 1002, 1003.jpg) -->
+          <div class="empty-room-view" id="emptyRoomView" style="display: none;">
+            <p>Pas encore d'appareils.</p>
+            <button class="btn-blue-rect" id="emptyAddBtn">Ajouter</button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================== -->
+      <!-- SCREEN 2: SCÉNARIO (2000.jpg)                  -->
+      <!-- ============================================== -->
+      <section id="screenScenario" class="mobile-screen">
+        <div class="scenario-header">
+          <button class="home-selector-btn">
+            <span>Toutes les maisons</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="scenario-top-icons">
+            <button class="room-action-btn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+            <button class="room-action-btn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg></button>
+            <button class="room-action-btn" id="scenarioCreateBtn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></button>
+          </div>
+        </div>
+
+        <div class="screen-scroll-body scenario-body">
+          <div class="scenario-list" id="scenesContainer">
+            <!-- Dynamic scenes populated by JS -->
+          </div>
+
+          <div class="scenario-empty-area" id="scenarioEmptyArea">
+            <div class="box-illustration-art">
+              <svg viewBox="0 0 140 140" width="130" height="130" fill="none">
+                <circle cx="70" cy="70" r="58" fill="#f1f5f9"/>
+                <path d="M46 60L70 46L94 60L94 90L70 104L46 90Z" fill="#94a3b8"/>
+                <path d="M70 46L94 60L70 74L46 60Z" fill="#cbd5e1"/>
+                <path d="M70 74L94 60L94 90L70 104Z" fill="#64748b"/>
+                <path d="M84 38L98 28L90 46L84 38Z" fill="#38bdf8"/>
+                <circle cx="50" cy="45" r="3" fill="#cbd5e1"/>
+                <circle cx="95" cy="54" r="3.5" fill="#cbd5e1"/>
+              </svg>
+            </div>
+            <p class="empty-instruction-text">
+              Appuyez sur le bouton ci-dessous ou sur le « + » en haut à droite pour créer une scène manuelle ou automatique.
+            </p>
+            <button class="btn-blue-pill" id="buildSceneBtn">Construire maintenant</button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================== -->
+      <!-- SCREEN 3: APERÇU (3000.jpg)                    -->
+      <!-- ============================================== -->
+      <section id="screenApercu" class="mobile-screen">
+        <div class="apercu-header">
+          <button class="home-selector-btn">
+            <span>My Home</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <h2 class="screen-title-center">Aperçu</h2>
+          <button class="room-action-btn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1.5"/><circle cx="6" cy="12" r="1.5"/><circle cx="18" cy="12" r="1.5"/></svg></button>
+        </div>
+
+        <div class="screen-scroll-body apercu-body">
+          <!-- Card 1: Appareils allumés -->
+          <div class="apercu-widget-card" id="cardActiveDevices">
+            <span class="widget-label">Appareils allumés</span>
+            <div class="widget-row">
+              <div class="widget-icon-leaf">
+                <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#10b981" stroke-width="2.2"><path d="M11 20A7 7 0 0 1 4 13a7 7 0 0 1 7-7c4 0 9 2 9 7a7 7 0 0 1-7 7Z"/><path d="M11 20V10"/></svg>
+              </div>
+              <div class="widget-content">
+                <h4 id="labelActiveDevicesCount">Tous les appareils sont éteints.</h4>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Tableau de bord de l'énergie -->
+          <div class="apercu-widget-card clickable" id="openEnergyDashboardBtn">
+            <span class="widget-label">Tableau de bord de l'énergie</span>
+            <div class="widget-row">
+              <div class="widget-icon-energy">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#f59e0b" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div class="widget-content">
+                <h4>Tableau de bord de l'énergie</h4>
+                <p>Voir la consommation d'électricité.</p>
+              </div>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+          </div>
+
+          <!-- Card 3: Simulation de présence -->
+          <div class="apercu-widget-card clickable" id="cardPresence">
+            <span class="widget-label">Simulation de présence</span>
+            <div class="widget-row">
+              <div class="widget-icon-presence">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#3b82f6" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+              </div>
+              <div class="widget-content">
+                <h4>Simulation de présence</h4>
+                <p>Allumez ou éteignez les appareils au hasard pour simuler quelqu'un à la maison.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================== -->
+      <!-- SCREEN 4: MESSAGE (4000, 4010, 4020.jpg)       -->
+      <!-- ============================================== -->
+      <section id="screenMessage" class="mobile-screen">
+        <div class="message-header">
+          <div class="msg-subnav">
+            <button class="msg-subtab" data-sub="tutoriel">Tutoriel</button>
+            <button class="msg-subtab active" data-sub="explorer">Explorer<span class="red-badge-dot"></span></button>
+            <button class="msg-subtab" data-sub="notif">Notifica...</button>
+          </div>
+          <button class="room-action-btn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+        </div>
+
+        <div class="screen-scroll-body">
+          <!-- Subtab 1: Tutoriel (4000.jpg) -->
+          <div class="msg-subview" id="subviewTutoriel" style="display: none;">
+            <div class="banner-tutoriel">
+              <h3>À Propos De La Chaîne Tutoriel</h3>
+              <p>Et Des Articles Dans Votre Langue</p>
+              <button class="btn-blue-pill-sm">EN SAVOIR PLUS &rarr;</button>
+            </div>
+            <div class="feed-article-card">
+              <img src="design_mockups/4000.jpg" alt="Poulailler" class="feed-img">
+              <div class="feed-article-text">
+                <h4>Comment construire un poulailler plus intelligent pour son jardin grâce à Spower</h4>
+                <p>Surveillez de plus près votre poulailler grâce à Spower...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subtab 2: Explorer (4010.jpg) -->
+          <div class="msg-subview" id="subviewExplorer">
+            <div class="feed-article-card">
+              <div class="card-hero-mockup">
+                <div class="blueprint-preview">
+                  <div class="blueprint-room">Living Room</div>
+                  <div class="blueprint-room">Kitchen</div>
+                  <div class="blueprint-badge">FREE Floor Plan</div>
+                </div>
+              </div>
+              <div class="feed-article-text">
+                <h4>Essayez gratuitement Floor Plan avec un exemple d'agencement</h4>
+                <p>Découvrez un agencement prêt à l'emploi et voyez comment...</p>
+              </div>
+            </div>
+
+            <div class="feed-article-card">
+              <div class="feed-article-text">
+                <span class="pill-badge-blue">Spower Web V3.29.0 Updates</span>
+                <h4>Mises à jour de Spower Web V3.29.0</h4>
+                <p>Découvrez le plan d'étage avec un exemple d'aménagement...</p>
+              </div>
+            </div>
+
+            <div class="feed-article-card">
+              <div class="feed-article-text">
+                <h4>Ajoutez des appareils et scannez des codes QR plus rapidement depuis votre écran d'accueil</h4>
+                <p>Ajoutez des appareils et scannez des codes QR plus rapidem...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subtab 3: Notifications (4020.jpg) -->
+          <div class="msg-subview" id="subviewNotif" style="display: none;">
+            <div class="notif-category-card">
+              <div class="notif-cat-icon blue-bell">📢</div>
+              <div class="notif-cat-text">
+                <h4>Notification du système</h4>
+                <p>Vous n'avez aucune notification.</p>
+              </div>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+
+            <div class="notif-category-card">
+              <div class="notif-cat-icon purple-cube">💠</div>
+              <div class="notif-cat-text">
+                <h4>Notification de Scène</h4>
+                <p>Vous n'avez aucune notification.</p>
+              </div>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </div>
+
+            <div class="notif-house-filter">
+              <span>Maisons ▼</span>
+            </div>
+
+            <div class="notif-empty-illustration">
+              <svg viewBox="0 0 160 160" width="140" height="140" fill="none">
+                <circle cx="80" cy="80" r="60" fill="#f8fafc"/>
+                <rect x="55" y="45" width="50" height="70" rx="4" fill="#3b82f6" opacity="0.3"/>
+                <rect x="60" y="50" width="40" height="60" rx="3" fill="#ffffff"/>
+                <line x1="68" y1="62" x2="92" y2="62" stroke="#94a3b8" stroke-width="2"/>
+                <line x1="68" y1="70" x2="86" y2="70" stroke="#cbd5e1" stroke-width="2"/>
+                <line x1="68" y1="78" x2="90" y2="78" stroke="#cbd5e1" stroke-width="2"/>
+              </svg>
+              <p>Vous n'avez aucune notification.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================== -->
+      <!-- SCREEN 5: PROFIL (5000, 5001.jpg)              -->
+      <!-- ============================================== -->
+      <section id="screenProfil" class="mobile-screen">
+        <div class="profil-header">
+          <h2>Profil</h2>
+          <button class="room-action-btn"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+        </div>
+
+        <div class="screen-scroll-body profil-body">
+          <div class="user-card-row">
+            <div>
+              <h3>Créer un surnom</h3>
+              <span class="user-email-text">khali****anzi@gmail.com</span>
+            </div>
+            <a href="#" class="profile-more-link">En savoir plus &rsaquo;</a>
+          </div>
+
+          <!-- VIP Upgrade Banner -->
+          <div class="vip-upgrade-box">
+            <div class="vip-badge-tag">VIP</div>
+            <div class="vip-info">
+              <strong>Souscrire à un abonnement</strong>
+              <span>Débloquez des fonctionnalités...</span>
+            </div>
+            <button class="btn-dark-pill">Mettre à niveau maintenant</button>
+          </div>
+
+          <!-- Prime Free banner -->
+          <div class="prime-free-strip">
+            <span>⚡ Try Prime Free for 30 Days</span>
+            <span class="chevron-gray">&rsaquo;</span>
+          </div>
+
+          <!-- Events Banner -->
+          <div class="events-promo-banner">
+            <div>
+              <strong>Get various insider events</strong>
+            </div>
+            <button class="btn-join-now">&gt; Join Now</button>
+          </div>
+
+          <!-- Settings list -->
+          <div class="menu-list-card">
+            <div class="menu-list-row">
+              <div class="menu-row-left">
+                <span class="icon-circle-sm">💙</span>
+                <span>Fonctionne avec</span>
+              </div>
+              <div class="menu-row-right">
+                <span class="partners-text">Google • Alexa • Hue • Matter</span>
+                <span class="chevron-gray">&rsaquo;</span>
+              </div>
+            </div>
+
+            <div class="menu-list-row">
+              <div class="menu-row-left">
+                <span class="icon-circle-sm">📁</span>
+                <span>Gérer le partage</span>
+              </div>
+              <span class="chevron-gray">&rsaquo;</span>
+            </div>
+
+            <div class="menu-list-row">
+              <div class="menu-row-left">
+                <span class="icon-circle-sm">🌐</span>
+                <span>Forum</span>
+              </div>
+              <span class="chevron-gray">&rsaquo;</span>
+            </div>
+
+            <div class="menu-list-row">
+              <div class="menu-row-left">
+                <span class="icon-circle-sm">🚘</span>
+                <span>Carplay <span class="tag-adv">Advanced</span></span>
+              </div>
+              <span class="chevron-gray">&rsaquo;</span>
+            </div>
+
+            <div class="menu-list-row">
+              <div class="menu-row-left">
+                <span class="icon-circle-sm">🔬</span>
+                <span>Fonctionnalités du pilote</span>
+              </div>
+              <span class="chevron-gray">&rsaquo;</span>
+            </div>
+
+            <div class="menu-list-row">
+              <div class="menu-row-left">
+                <span class="icon-circle-sm">💬</span>
+                <span>Aide et commentaire</span>
+              </div>
+              <span class="chevron-gray">&rsaquo;</span>
+            </div>
+
+            <div class="menu-list-row">
+              <div class="menu-row-left">
+                <span class="icon-circle-sm">🎁</span>
+                <span>Remerciements spéciaux</span>
+              </div>
+              <span class="chevron-gray">&rsaquo;</span>
+            </div>
+
+            <div class="menu-list-row">
+              <div class="menu-row-left">
+                <span class="icon-circle-sm">ℹ️</span>
+                <span>À propos (Spower 5.29.1)</span>
+              </div>
+              <span class="chevron-gray">&rsaquo;</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main><!-- End app-viewport -->
+
+
+    <!-- ============================================== -->
+    <!-- BOTTOM NAVIGATION (5 EXACT TABS)               -->
+    <!-- ============================================== -->
+    <nav class="ios-tab-bar">
+      <!-- 1. Domicile -->
+      <button class="tab-button active" data-screen="screenDomicile">
+        <div class="tab-pill-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <span>Domicile</span>
+      </button>
+
+      <!-- 2. Scénario -->
+      <button class="tab-button" data-screen="screenScenario">
+        <div class="tab-pill-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <span>Scénario</span>
+      </button>
+
+      <!-- 3. Aperçu -->
+      <button class="tab-button" data-screen="screenApercu">
+        <div class="tab-pill-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/></svg>
+        </div>
+        <span>Aperçu</span>
+      </button>
+
+      <!-- 4. Message -->
+      <button class="tab-button" data-screen="screenMessage">
+        <div class="tab-pill-icon has-badge">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <span class="badge-dot-red"></span>
+        </div>
+        <span>Message</span>
+      </button>
+
+      <!-- 5. Profil -->
+      <button class="tab-button" data-screen="screenProfil">
+        <div class="tab-pill-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <span>Profil</span>
+      </button>
+    </nav>
+
+    <!-- iOS Home Bar Indicator -->
+    <div class="ios-bottom-home-indicator"></div>
+
+
+    <!-- ============================================== -->
+    <!-- MODAL A: GÉRER MAISONS (1010.jpg)              -->
+    <!-- ============================================== -->
+    <div class="bottom-sheet-modal" id="modalHomePicker">
+      <div class="bottom-sheet-backdrop" id="backdropHomePicker"></div>
+      <div class="bottom-sheet-panel">
+        <div class="bottom-sheet-drag-handle"></div>
+        <div class="house-item active" id="chooseMyHome">
+          <span>My Home</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#0284c7" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="bottom-sheet-divider"></div>
+        <button class="btn-manage-houses" id="btnManageHouses">Gérer Maisons</button>
+      </div>
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- MODAL B: APPAIRAGE WI-FI (1021.jpg)            -->
+    <!-- ============================================== -->
+    <div class="ios-full-view" id="viewPairing">
+      <div class="ios-view-header">
+        <button class="back-nav-btn" id="closePairingBtn">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <span class="view-header-title">Ajouter un appareil</span>
+        <div class="view-header-right">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#10b981" stroke-width="2"><path d="M2 12h20M7 8h10M9 16h6"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+      </div>
+
+      <div class="pairing-scroll-content">
+        <h3 class="pairing-title">Veuillez configurer l'appareil en mode appairage</h3>
+        <p class="pairing-desc">
+          Choisissez un WiFi 2,4Ghz pour l'appairage de l'appareil et entrez le bon mot de passe<br>
+          Si votre WiFi de 2.4Ghz et votre WiFi de 5Ghz partagent le même SSID WiFi, il est recommandé de changer les paramètres de votre routeur ou d'essayer un mode d'appairage compatible.
+        </p>
+
+        <!-- Frequency boxes (1021.jpg) -->
+        <div class="freq-box-container">
+          <div class="freq-pill red-cross">✕ WiFi–5GHz</div>
+          <div class="freq-pill blue-check">
+            <span>✓ WiFi–2.4GHz</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><line x1="12" y1="20" x2="12.01" y2="20" stroke-width="3"/></svg>
+          </div>
+        </div>
+
+        <div class="bluetooth-notice">
+          <span>Prise en charge de l'ajout de périphériques WiFi et Bluetooth</span>
+          <span class="blue-link">WiFi 2.4 Ghz seulement &rsaquo;</span>
+        </div>
+
+        <!-- Pairing Form -->
+        <form id="formAddDevice" class="form-pairing-body">
+          <div class="wifi-input-field">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/></svg>
+            <input type="text" id="inputSsid" value="globalnet" placeholder="Nom du réseau" required>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+          </div>
+
+          <div class="wifi-input-field">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#94a3b8" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="inputPass" value="K72316913" placeholder="Mot de passe">
+            <button type="button" class="btn-toggle-eye" id="btnToggleEye">👁</button>
+          </div>
+
+          <label class="checkbox-remember">
+            <input type="checkbox" id="checkRemember" checked>
+            <span class="round-check"></span>
+            <span>Mémoriser le mot de passe</span>
+          </label>
+
+          <!-- New device configuration -->
+          <div class="device-naming-box">
+            <label>Nom de l'appareil :</label>
+            <input type="text" id="inputDevName" value="Sonoff POW Élite 16A" required>
+
+            <label>Assigner à la pièce :</label>
+            <select id="selectDevRoom">
+              <option value="Livingroom">Livingroom</option>
+              <option value="Bedroom">Bedroom</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-blue-rect-large">Suivant</button>
+        </form>
+
+        <div class="pairing-bottom-actions">
+          <div class="action-bubble">
+            <div class="bubble-circle">📱</div>
+            <span>Appairage compatible</span>
+          </div>
+          <div class="action-bubble">
+            <div class="bubble-circle">•••</div>
+            <span>Plus d'options</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- MODAL C: SCANNER QR CODE (1022.jpg)            -->
+    <!-- ============================================== -->
+    <div class="ios-full-view camera-dark-view" id="viewScanQr">
+      <div class="ios-view-header transparent-header">
+        <button class="back-nav-btn text-white" id="closeScanQrBtn">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <span class="view-header-title text-white">Ajouter un appareil</span>
+        <div style="width: 24px"></div>
+      </div>
+
+      <div class="camera-simulation-viewport">
+        <!-- Viewfinder with Laser -->
+        <div class="laser-scanner-box">
+          <div class="laser-corner corner-tl"></div>
+          <div class="laser-corner corner-tr"></div>
+          <div class="laser-corner corner-bl"></div>
+          <div class="laser-corner corner-br"></div>
+          <div class="laser-beam"></div>
+        </div>
+        <p class="scanner-help-text">Ajuster le code QR dans le cadre pour scanner</p>
+      </div>
+
+      <div class="scanner-bottom-bar">
+        <button class="flashlight-circle-btn">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <a href="#" class="manual-add-link" id="linkManualAdd">Aucun code QR disponible. Ajouter manuellement. &rsaquo;</a>
+      </div>
+    </div>
+
+
+    <!-- ============================================== -->
+    <!-- MODAL D: ENERGY DASHBOARD FROM APERÇU          -->
+    <!-- ============================================== -->
+    <div class="ios-full-view" id="viewEnergyDashboard">
+      <div class="ios-view-header">
+        <button class="back-nav-btn" id="closeEnergyBtn">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <span class="view-header-title">Tableau de bord de l'énergie</span>
+        <div style="width: 24px"></div>
+      </div>
+
+      <div class="pairing-scroll-content">
+        <!-- Live Energy Gauge -->
+        <div class="energy-live-card">
+          <span class="badge-live-pulse">EN DIRECT (0ms LAN)</span>
+          <div class="live-power-display">
+            <span class="live-power-number" id="liveWattsDisplay">0</span>
+            <span class="live-power-unit">Watts</span>
+          </div>
+          <div class="live-grid-substats">
+            <span>Tension: <strong id="liveVoltsDisplay">230.2 V</strong></span>
+            <span>Intensité: <strong id="liveAmpsDisplay">0.0 A</strong></span>
+          </div>
+        </div>
+
+        <!-- Canvas Chart -->
+        <div class="mini-chart-container">
+          <span class="mini-chart-title">Consommation temps réel (60s)</span>
+          <canvas id="mobileChartCanvas" width="340" height="150"></canvas>
+        </div>
+
+        <!-- Monthly & Daily Consumption -->
+        <div class="energy-kwh-summary">
+          <div class="kwh-box">
+            <span class="kwh-label">Aujourd'hui</span>
+            <strong class="kwh-val" id="todayKwhDisplay">0.00 kWh</strong>
+            <span class="kwh-cost" id="todayCostDisplay">0.00 €</span>
+          </div>
+          <div class="kwh-box">
+            <span class="kwh-label">Ce Mois</span>
+            <strong class="kwh-val">48.20 kWh</strong>
+            <span class="kwh-cost">7.71 €</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- End mobile-app-shell -->
+
+  <script src="mobile.js"></script>
+</body>
+</html>
